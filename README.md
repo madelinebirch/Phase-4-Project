@@ -11,7 +11,7 @@ Our protagonist in this story is CineSYNC, a veteran streaming service that's re
 Our mission is to introduce CineSYNC to the basics and intricacies of user-based recommendation systems. We'll delve into various collaborative filtering techniques such as Singular Value Decomposition (SVD) and Alternating Least Squares (ALS), demystify the underlying concepts, and evaluate model performance. Model evaluation metrics RMSE (root mean squared error) and MAE (mean absolute error) will be our compass along this exploratory journey, laying the groundwork for CineSYNC to build on and iterate further in modeling processes of their own. With our foundational support, CineSYNC can be better positioned as a leading underdog among industry giants.
 
 # Data Understanding
-<img src="Images/grouplens_logo.png" alt="grouplens Logo" width="300" height="200">
+<img src="Images/grouplens_logo.png" alt="grouplens Logo" width="200" height="100">
 
 In this project, we will be working with the MovieLens dataset provided by the GroupLens research lab at the University of Minnesota. The dataset is a well-known resource in the field of recommendation systems and contains information about movies, user ratings, and user-generated tags.
 

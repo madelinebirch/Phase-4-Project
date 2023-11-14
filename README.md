@@ -1,4 +1,4 @@
-# CineSYNC: Navigating the Stream to Success
+# CineSYNC: Stream to Success
 **An Exploratory Approach to Personalized Recommendation Systems**
 
 <img src="Images/cineSYNC_logo.png" alt="CineSYNC Logo" width="300" height="200">

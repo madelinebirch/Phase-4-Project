@@ -115,8 +115,50 @@ The Surprise library serves as a fitting choice for implementing SVD in our reco
 **SVD MAE:** 0.4044
 *Our SVD model's MAE score is 0.4044, indicating that, on average, the absolute difference between predicted and actual ratings is around 0.4044 units (or 'stars').*
 
+### Model 3: KNNWithMeans with Surprise
+#### What is KNNWithMeans?
+In our ongoing mission to refine cineSYNC's recommendation system, we're exploring the K-Nearest Neighbors with Means (KNNWithMeans) algorithm using the Surprise library. Unlike our previous models (ALS and SVD), KNNWithMeans operates within the realm of memory-based collaborative filtering. This approach is rooted in the idea that users who have agreed in the past are likely to agree again in the future, utilizing the "memory" of past interactions to predict unseen items.
+
+The "k" in KNN refers to the number of neighbors considered when making predictions, implying identifying users with similar tastes and incorporating their opinions to predict how a particular user might rate a movie. KNNWithMeans calculates predictions by considering the weighted average of ratings from users who share similarities, adjusting for each user's mean rating. This adjustment, referred to as "means," helps account for the inherent variability in how users rate items.
+
+In the context of collaborative filtering, a supervised learning approach involves training a model on existing user-item interactions to predict how users might rate unseen items. KNNWithMeans embraces this concept by learning from historical ratings of users who share similarities, using this knowledge to generate personalized recommendations.
 
 
+#### Why Susprise (again)?
+Surprise excels in handling user-item interaction data, streamlining the process of creating train-test splits, defining reader configurations, and training models. It offers a unified framework for various collaborative filtering algorithms, making it an ideal choice for our exploration of KNNWithMeans.
+
+*See notebook for full code of KNNWithMeans modeling.*
+
+<img src="Images/KNN_rec_output.png" alt="KNNWithMeans Top 10" width="400" height="200">
+[Top 10 Recommendations for User 59 based on KNNWithMeans Model]
+
+### KNNWithMeans Model Evaluation
+
+**KNN RMSE:** 0.3822
+
+**KNN MAE:** 0.3201
+
+*It appears our KNNWithMeans model's RMSE is better than our SVD model's, at 0.382, and the MAE score compared to the SVD model's has dropped to 0.320. Not a huge difference, but it gets us that must closer to accurately predicting our users' preferences.*
+
+
+### Model 4: Tuned KNNWithMeans 
+
+Building on our original KNNWithMeans model to see if we can get lower evaluation metrics, we will focus here on the `sim_options_tuned` snippet:
+
+1. **K Neighbors (`k`):** Instead of letting Surprise set a default value for`k` (the number of similar users to consider when making predictions), we set it to 1o ourselves. A lower value often leads to more personalized recommendations.
+2. **min_support:** `min_support` is set to 50, indicating that there must be a minimum of 50 common items between two users for them to be considered neighbors.
+3. **`shrinkage`:** A higher shrinkage value like 300 indicates stronger regularization, which can be beneficial in scenarios with sparse data or when you want to prevent the model from overfitting to the training data
+
+**KNN2 RMSE:** 0.3182
+
+**KNN2 MAE:** 0.1955
+
+Our RMSE and MAE values are getting closer and closer to 0 every time, indicating more and more accurate predictions.
+
+It would be helpful to create a DataFrame that prints out all of our evaluation metrics in one place so that we can see how our model iterations have yielded increasingly more favorable scores:
+
+<img src="Images/all_metrics_df.png" alt="DataFrame of ALl Model Evaluation Metrics" width="400" height="200">
+[DataFrame of All Model Evaluation Metrics]
 
 
 

@@ -50,7 +50,7 @@ Because we are using collaborative filtering, our prediction target will be the 
 #### RMSE (Root Mean Squared Error):
 RMSE measures the average magnitude of the differences between predicted and actual values, emphasizing larger errors. For cineSYNC, a lower RMSE indicates better predictive accuracy and alignment with user preferences. The closer to 0, the more accurate.
 
-<img src="Images/RMSE_equation.png" alt="RMSE" width="500" height="400">
+<img src="Images/RMSE_equation.png" alt="RMSE" width="300" height="200">
 [Image source: https://docs.oracle.com/en/cloud/saas/planning-budgeting-cloud/pfusu/img/insights_rmse_formula.jpg]
 
 #### MAE (Mean Absolute Error):
@@ -60,5 +60,18 @@ MAE gauges the average absolute differences between predicted and actual values,
 [Image source: https://medium.com/@polanitzer/the-minimum-mean-absolute-error-mae-challenge-928dc081f031]
 
 ### Model 1: Alternating Least Squares (ALS) with PySpark
+
+#### What is ALS?
+To begin our journey into cineSYNC's potential with CF systems, we'll firstly introduce the ALS model. The ALS (Alternating Least Squares) recommendation model is a supervised learning algorithm commonly employed in recommendation systems. Unlike traditional supervised learning, where the algorithm learns from labeled data with explicit input-output pairs, ALS operates in a unique manner within the collaborative filtering framework.
+
+In supervised learning, the algorithm learns a mapping from input features to target labels based on a labeled training dataset. In contrast, ALS is employed in a semi-supervised fashion for collaborative filtering, which inherently lacks explicit labels. Instead, it utilizes the implicit feedback inherent in user-item interactions, such as user ratings, to capture underlying patterns in the data.
+
+The ALS algorithm optimizes the latent factors by iteratively decomposing the user-item interaction matrix, minimizing the reconstruction error between observed and predicted ratings. This iterative optimization process is the hallmark of ALS, as it alternates between fixing one matrix (either user or item factors) and optimizing the other. Through this alternating process, ALS uncovers latent features that represent user preferences, facilitating the generation of accurate and personalized recommendations.
+
+#### How is PySpark Used in the Context of ALS?
+**PySpark,** the Python API for Apache Spark, offers a scalable and distributed computing framework ideal for large-scale collaborative filtering tasks. ALS in PySpark facilitates the training of models on extensive datasets, ensuring efficient handling of user-item interactions. This is particularly valuable for cineSYNC's ambition to provide a more personalized user experience at scale.
+
+*See notebook for full code and markdown of ALS modeling.*
+<img src="Images/ALS_rec_output.png" alt="ALS Top 10" width="400" height="300">
 
 

@@ -43,8 +43,7 @@ See notebook for a full EDA and plotted distributions of 'ratings' and other eng
 #### RMSE (Root Mean Squared Error):
 RMSE measures the average magnitude of the differences between predicted and actual values, emphasizing larger errors. For cineSYNC, a lower RMSE indicates better predictive accuracy and alignment with user preferences. The closer to 0, the more accurate.
 
-<img src="Images/grouplens_logo.png" alt="<img src="Images/grouplens_logo.png" alt="grouplens Logo" width="200" height="100">
-" width="200" height="100">
+<img src="Images/RMSE_equation.png" alt="RMSE" width="200" height="100">
 
 
 

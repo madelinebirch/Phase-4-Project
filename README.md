@@ -46,7 +46,7 @@ See notebook for a full EDA and plotted distributions of 'ratings' and other eng
 #### RMSE (Root Mean Squared Error):
 RMSE measures the average magnitude of the differences between predicted and actual values, emphasizing larger errors. For cineSYNC, a lower RMSE indicates better predictive accuracy and alignment with user preferences. The closer to 0, the more accurate.
 
-<img src="Images/RMSE_equation.png" alt="RMSE" width="500" height="400">
+<img src="Images/RMSE_equation.png" alt="RMSE" width="800" height="400">
 [Image source: https://docs.oracle.com/en/cloud/saas/planning-budgeting-cloud/pfusu/img/insights_rmse_formula.jpg]
 
 #### MAE (Mean Absolute Error):

@@ -72,6 +72,6 @@ The ALS algorithm optimizes the latent factors by iteratively decomposing the us
 **PySpark,** the Python API for Apache Spark, offers a scalable and distributed computing framework ideal for large-scale collaborative filtering tasks. ALS in PySpark facilitates the training of models on extensive datasets, ensuring efficient handling of user-item interactions. This is particularly valuable for cineSYNC's ambition to provide a more personalized user experience at scale.
 
 *See notebook for full code and markdown of ALS modeling.*
-<img src="Images/ALS_rec_output.png" alt="ALS Top 10" width="400" height="300">
+<img src="Images/ALS_rec_output.png" alt="ALS Top 10" width="400" height="200">
 
 

@@ -76,7 +76,7 @@ The ALS algorithm optimizes the latent factors by iteratively decomposing the us
 <img src="Images/ALS_rec_output.png" alt="ALS Top 10" width="400" height="200">
 [Top 10 Recommendations for User 123 based on ALS Model]
 
-#### ALS Model Evaluation
+### ALS Model Evaluation
 
 **ALS RMSE:** 0.5705045822613408
 *On average, the predicted ratings deviate from the actual ratings by approximately 0.57 units (or 'stars') on a rating scale of 0 to 5.*
@@ -105,13 +105,16 @@ The Surprise library serves as a fitting choice for implementing SVD in our reco
 *See notebook for full code of SVD modeling.*
 
 <img src="Images/SVD_rec_output.png" alt="SVD Top 10" width="400" height="200">
-[Top 10 Recommendations for User 300 based on ALS Model]
+[Top 10 Recommendations for User 300 based on SVD Model]
+
+### SVD Model Evaluation
 
 **SVD RMSE:** 0.4751
 *Our SVD model's RMSE score is 0.475, indicating that, on average, the model's predictions deviate from actual ratings by around 0.4751 units (or 'stars'). We see a slight improvement with our SVD model compared to our ALS model in RMSE, jumping down from ~0.57 to 0.48.*
 
 **SVD MAE:** 0.4044
 *Our SVD model's MAE score is 0.4044, indicating that, on average, the absolute difference between predicted and actual ratings is around 0.4044 units (or 'stars').*
+
 
 
 

@@ -72,6 +72,48 @@ The ALS algorithm optimizes the latent factors by iteratively decomposing the us
 **PySpark,** the Python API for Apache Spark, offers a scalable and distributed computing framework ideal for large-scale collaborative filtering tasks. ALS in PySpark facilitates the training of models on extensive datasets, ensuring efficient handling of user-item interactions. This is particularly valuable for cineSYNC's ambition to provide a more personalized user experience at scale.
 
 *See notebook for full code and markdown of ALS modeling.*
+
 <img src="Images/ALS_rec_output.png" alt="ALS Top 10" width="400" height="200">
+[Top 10 Recommendations for User 123 based on ALS Model]
+
+#### ALS Model Evaluation
+
+**ALS RMSE:** 0.5705045822613408
+*On average, the predicted ratings deviate from the actual ratings by approximately 0.57 units (or 'stars') on a rating scale of 0 to 5.*
+
+**ALS MAE:** 0.45136323380030924
+*On average, the absolute difference between predicted and actual ratings is approximately 0.45 units (or 'stars') on a rating scale of 0 to 5.*
+
+Both the RMSE and MAE values for our ALS model are under 1.0, indicating that the ALS collaborative filtering model is performing well in predicting user ratings. Users can expect the predicted ratings to be reasonably close to their actual ratings, making the model a promising tool for generating accurate movie recommendations within the collaborative filtering framework.
+
+**NOTE:** *ALS is a stochastic algorithm. Stochastic algorithms introduce an element of randomness in their operations, leading to potentially different outcomes on each run, even with the same initial conditions. This randomness is intentional and often used to overcome challenges or limitations in deterministic algorithms. Though we took pains to set a seed for reproducibility of output, recommendations results and evaluation metrics may not be the same every time due to the distributed nature of Spark. However, running multiple iterations should provide insights into the stability of the recommendations.*
+
+### Model 2: Singular Value Decomposition (SVD) with Surprise
+
+#### What is SVD?
+Welcome to Model 2, our second foray into exploring which collaborative filtering system would serve cineSYNC best. Here, we introduce Singular Value Decomposition (SVD) implemented with the Surprise library. SVD is a dimensionality reduction technique that transforms the user-item interaction matrix into a lower-dimensional representation of itself, capturing latent factors that contribute to user preferences. 
+
+SVD decomposes the user-item interaction matrix into three matrices: `U` (user matrix), `Σ` (diagonal matrix of singular values), and `V^T` (item matrix transpose). By retaining only the top singular values, SVD reduces the dimensionality of the original matrix, revealing latent factors that represent underlying patterns in the data.
+
+While traditional supervised ML algorithms learn from labeled data with explicit input-output pairs, SVD (like ALS) utilizes implicit feedback from user-item interactions. In a supervised learning paradigm, SVD learns to predict user ratings (labels, whichh, although not explicitly labeled, serve as a form of implicit feedback that guides the learning process) for items based on historical ratings. The goal is to minimize the difference between predicted and actual ratings, just like a regression problem in supervised learning.
+
+#### Why Surprise?
+The Surprise library serves as a fitting choice for implementing SVD in our recommendation system. Here's why:
+- **Ease of Use:** Surprise abstracts away the complexity of SVD implementation, providing an intuitive interface that simplifies the integration of collaborative filtering algorithms.
+- **Efficient Algorithms:** Surprise is optimized for efficiency, leveraging well-established algorithms for collaborative filtering tasks. This efficiency is crucial, especially when working with large-scale datasets.
+
+*See notebook for full code of SVD modeling.*
+
+<img src="Images/SVD_rec_output.png" alt="SVD Top 10" width="400" height="200">
+[Top 10 Recommendations for User 300 based on ALS Model]
+
+**SVD RMSE:** 0.4751
+*Our SVD model's RMSE score is 0.475, indicating that, on average, the model's predictions deviate from actual ratings by around 0.4751 units (or 'stars'). We see a slight improvement with our SVD model compared to our ALS model in RMSE, jumping down from ~0.57 to 0.48.*
+
+**SVD MAE:** 0.4044
+*Our SVD model's MAE score is 0.4044, indicating that, on average, the absolute difference between predicted and actual ratings is around 0.4044 units (or 'stars').*
+
+
+
 
 

@@ -18,7 +18,7 @@ Collaborative filtering holds a distinct advantage in capturing complex and evol
 
 
 # Data Understanding
-<img src="Images/grouplens_logo.png" alt="grouplens Logo" width="200" height="100">
+<img src="Images/grouplens_logo.png" alt="grouplens Logo" width="800" height="500">
 
 In this project, we will be working with the MovieLens dataset provided by the GroupLens research lab at the University of Minnesota. The dataset is a well-known resource in the field of recommendation systems and contains information about movies, user ratings, and user-generated tags.
 
@@ -46,7 +46,7 @@ See notebook for a full EDA and plotted distributions of 'ratings' and other eng
 #### RMSE (Root Mean Squared Error):
 RMSE measures the average magnitude of the differences between predicted and actual values, emphasizing larger errors. For cineSYNC, a lower RMSE indicates better predictive accuracy and alignment with user preferences. The closer to 0, the more accurate.
 
-<img src="Images/RMSE_equation.png" alt="RMSE" width="800" height="400">
+<img src="Images/RMSE_equation.png" alt="RMSE" width="500" height="400">
 [Image source: https://docs.oracle.com/en/cloud/saas/planning-budgeting-cloud/pfusu/img/insights_rmse_formula.jpg]
 
 #### MAE (Mean Absolute Error):

@@ -43,12 +43,14 @@ See notebook for a full EDA and plotted distributions of 'ratings' and other eng
 #### RMSE (Root Mean Squared Error):
 RMSE measures the average magnitude of the differences between predicted and actual values, emphasizing larger errors. For cineSYNC, a lower RMSE indicates better predictive accuracy and alignment with user preferences. The closer to 0, the more accurate.
 
-<img src="Images/RMSE_equation.png" alt="RMSE" width="200" height="100">
-
-
+<img src="Images/RMSE_equation.png" alt="RMSE" width="300" height="200">
+[Image source: https://docs.oracle.com/en/cloud/saas/planning-budgeting-cloud/pfusu/img/insights_rmse_formula.jpg]
 
 #### MAE (Mean Absolute Error):
 MAE gauges the average absolute differences between predicted and actual values, providing a more straightforward measure of model performance. Similar to RMSE, a lower MAE signifies better accuracy in predicting user preferences.
+
+<img src="Images/MAE_equation.png" alt="MAE" width="300" height="200">
+[Image source: https://medium.com/@polanitzer/the-minimum-mean-absolute-error-mae-challenge-928dc081f031]
 
 ### Model 1: Alternating Least Squares (ALS) with PySpark
 

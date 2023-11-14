@@ -10,7 +10,7 @@ Our protagonist in this story is cineSYNC, a veteran streaming service that's re
 ### Our Mission
 Our mission is to introduce cineSYNC to the basics and intricacies of user-based recommendation systems. We'll delve into various collaborative filtering techniques such as Singular Value Decomposition (SVD) and Alternating Least Squares (ALS), demystify the underlying concepts, and evaluate model performance. Collaborative filtering, a key focus of our exploration, involves recommending items based on the preferences and behavior of similar users. This approach, in contrast to content-based or hybrid filtering systems, harnesses the collective wisdom of the user community, allowing cineSYNC to tap into the diverse tastes of its audience.
 
-<img src="Images/cf_diagram.png" alt="Collaborative Filtering" width="400" height="300">
+<img src="Images/cf_diagram.png" alt="Collaborative Filtering" width="800" height="600">
 
 
 #### Why Collaborative Filtering?
@@ -18,7 +18,7 @@ Collaborative filtering holds a distinct advantage in capturing complex and evol
 
 
 # Data Understanding
-<img src="Images/grouplens_logo.png" alt="grouplens Logo" width="800" height="500">
+<img src="Images/grouplens_logo.png" alt="grouplens Logo" width="400" height="300">
 
 In this project, we will be working with the MovieLens dataset provided by the GroupLens research lab at the University of Minnesota. The dataset is a well-known resource in the field of recommendation systems and contains information about movies, user ratings, and user-generated tags.
 

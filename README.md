@@ -79,9 +79,11 @@ The ALS algorithm optimizes the latent factors by iteratively decomposing the us
 ### ALS Model Evaluation
 
 **ALS RMSE:** 0.5705045822613408
+
 *On average, the predicted ratings deviate from the actual ratings by approximately 0.57 units (or 'stars') on a rating scale of 0 to 5.*
 
 **ALS MAE:** 0.45136323380030924
+
 *On average, the absolute difference between predicted and actual ratings is approximately 0.45 units (or 'stars') on a rating scale of 0 to 5.*
 
 Both the RMSE and MAE values for our ALS model are under 1.0, indicating that the ALS collaborative filtering model is performing well in predicting user ratings. Users can expect the predicted ratings to be reasonably close to their actual ratings, making the model a promising tool for generating accurate movie recommendations within the collaborative filtering framework.
@@ -110,9 +112,11 @@ The Surprise library serves as a fitting choice for implementing SVD in our reco
 ### SVD Model Evaluation
 
 **SVD RMSE:** 0.4751
+
 *Our SVD model's RMSE score is 0.475, indicating that, on average, the model's predictions deviate from actual ratings by around 0.4751 units (or 'stars'). We see a slight improvement with our SVD model compared to our ALS model in RMSE, jumping down from ~0.57 to 0.48.*
 
 **SVD MAE:** 0.4044
+
 *Our SVD model's MAE score is 0.4044, indicating that, on average, the absolute difference between predicted and actual ratings is around 0.4044 units (or 'stars').*
 
 ### Model 3: KNNWithMeans with Surprise
@@ -160,5 +164,36 @@ It would be helpful to create a DataFrame that prints out all of our evaluation 
 <img src="Images/all_metrics_df.png" alt="DataFrame of ALl Model Evaluation Metrics" width="400" height="200">
 [DataFrame of All Model Evaluation Metrics]
 
+# Conclusions & Recommendations
 
+**Key Findings:**
 
+- ALS, with an RMSE of 0.570505 and MAE of 0.451363, showcased a respectable performance, laying a foundation for collaborative filtering.
+- SVD excelled with an RMSE of 0.475072 and MAE of 0.404359, demonstrating its robustness in capturing nuanced user preferences.
+- KNNWithMeans emerged as a powerful contender, achieving an RMSE of 0.382185 and MAE of 0.320137, highlighting its adaptability to dynamic user behavior.
+- A tuned version of KNNWithMeans (KNN2) further elevated performance with an RMSE of 0.318239 and MAE of 0.195525, showcasing the impact of hyperparameter optimization.
+
+**Collaborative Filtering Advantage:**
+Collaborative filtering, our primary focus, proved advantageous for cineSYNC's diverse content library. It dynamically adapts to user behavior, making it well-suited for platforms with evolving user preferences.
+
+### Recommendations
+- Use and refine the tuned KNNWithMeans (KNN2) model.
+- Experiment with different values for parameters like 'k,' 'min_support,' and 'shrinkage' to optimize configuration.
+
+### Next Steps
+1. **Scale Up Dataset:** Our modeling project utilized a small subset of the available data. Moving forward, we recommend expanding usage of the dataset to capture a broader spectrum of user preferences.
+
+2. **Exploring Additional Metrics:** While RMSE and MAE provide valuable insights into model accuracy, it's essential to consider alternative evaluation metrics such as NDCG (Normalized Discounted Cumulative Gain) or MAP (Mean Average Precision). These metrics may offer a more nuanced understanding of model performance, especially in scenarios where the emphasis is on the ranking quality of user recommendations.
+
+3. **Implementing User Feedback:** Incorporating direct user feedback is a powerful strategy for continuous improvement. By collecting and analyzing user ratings and interactions with recommended movies, cineSYNC can refine its models over time, adapting to evolving user preferences. Here are some ideas:
+    - Implement a simple thumbs-up or thumbs-down feedback option for quick responses.
+    - Track implicit feedback, such as the amount of time a user spends watching a recommended movie or the number of times they replay a specific scene.
+    - Periodically prompt users to participate in preference surveys.
+    - Monitor the click-through rate for recommended movies.
+    - Conduct A/B testing with different recommendation algorithms or variations of existing models.
+    - Allow users to curate their watchlist, and use this information to refine recommendations.
+    - Implement a "Recommended for You" section based on individual user preferences.
+    - Regularly update the recommendation model with the latest user feedback.
+    
+    
+4. **Exploring Content-Based or Hybrid Approaches:** While collaborative filtering excels in capturing user preferences, a hybrid approach that integrates content-based recommendations will be crucial. Considering features such as genre, director, or actor information in tandem with CF models will yield richer and more diverse recommendations.

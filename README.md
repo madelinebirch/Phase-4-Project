@@ -11,6 +11,7 @@ Our protagonist in this story is cineSYNC, a veteran streaming service that's re
 Our mission is to introduce cineSYNC to the basics and intricacies of user-based recommendation systems. We'll delve into various collaborative filtering techniques such as Singular Value Decomposition (SVD) and Alternating Least Squares (ALS), demystify the underlying concepts, and evaluate model performance. Collaborative filtering, a key focus of our exploration, involves recommending items based on the preferences and behavior of similar users. This approach, in contrast to content-based or hybrid filtering systems, harnesses the collective wisdom of the user community, allowing cineSYNC to tap into the diverse tastes of its audience.
 
 <img src="Images/cf_diagram.png" alt="Collaborative Filtering" width="800" height="600">
+[Image source: https://medium.com/@ashmi_banerjee/understanding-collaborative-filtering-f1f496c673fd]
 
 
 #### Why Collaborative Filtering?
@@ -18,7 +19,7 @@ Collaborative filtering holds a distinct advantage in capturing complex and evol
 
 
 # Data Understanding
-<img src="Images/grouplens_logo.png" alt="grouplens Logo" width="400" height="300">
+<img src="Images/grouplens_logo.png" alt="grouplens Logo" width="300" height="200">
 
 In this project, we will be working with the MovieLens dataset provided by the GroupLens research lab at the University of Minnesota. The dataset is a well-known resource in the field of recommendation systems and contains information about movies, user ratings, and user-generated tags.
 
@@ -36,13 +37,16 @@ The dataset is distributed in the ml-latest-small.zip archive and contains the f
 
 # Data Preparation
 
-See notebook for a full EDA and plotted distributions of 'ratings' and other engineered features. 
+*See notebook for a full EDA and plotted distributions of 'ratings' and other engineered features.* 
 
-**We will be working with a cleaned and filtered version of `ratings_df`, merged with a one-hot encoded `movies_df` as `movies_and_ratings_df` for ease of use in future content-based and/or hybrid modeling.**
+**For modeling, will be working with a cleaned and filtered version of `ratings_df`, merged with a one-hot encoded `movies_df` as `movies_and_ratings_df` for ease of use in future content-based and/or hybrid modeling.** 
 
 # Modeling
-### Evaluation Metrics
 
+### Target
+Because we are using collaborative filtering, our prediction target will be the `'ratings'` feature from `ratings_df`.
+
+### Evaluation Metrics
 #### RMSE (Root Mean Squared Error):
 RMSE measures the average magnitude of the differences between predicted and actual values, emphasizing larger errors. For cineSYNC, a lower RMSE indicates better predictive accuracy and alignment with user preferences. The closer to 0, the more accurate.
 

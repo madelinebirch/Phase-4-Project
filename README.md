@@ -211,19 +211,16 @@ Collaborative filtering, our primary focus, proved advantageous for cineSYNC's d
     
 4. **Exploring Content-Based or Hybrid Approaches:** While collaborative filtering excels in capturing user preferences, a hybrid approach that integrates content-based recommendations will be crucial. Considering features such as genre, director, or actor information in tandem with CF models will yield richer and more diverse recommendations.
 
-### Final Notes to Consider for All Models
+### Final Notes to Consider for Model-Based Matrix Factorization
 
 #### ALS (Alternating Least Squares):
 
 **Advantage:** ALS is well-suited for handling sparse matrices, making it effective in scenarios where users interact with only a small subset of items.
+
 **Disadvantage:** ALS may converge to local minima, and its performance can be influenced by the choice of hyperparameters, such as the regularization term.
 
 #### SVD (Matrix Factorization):
 
 **Advantage:** SVD provides a compact representation of latent factors, enabling efficient storage and faster computation for recommendations.
+
 **Disadvantage:** SVD may struggle with handling missing values, and it may not perform well in situations where the user-item interaction matrix is highly sparse.
-
-#### k-NN with Means (Memory-based, user-based=true):
-
-**Advantage:** k-NN with Means is interpretable and adapts well to changing user preferences over time as it relies on the most similar users or items.
-**Disadvantage:** This method can be computationally expensive, especially as the dataset grows, and it may struggle with the *cold start problem* for new users or items with limited interaction history.

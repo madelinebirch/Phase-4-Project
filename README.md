@@ -177,8 +177,23 @@ It would be helpful to create a DataFrame that prints out all of our evaluation 
 Collaborative filtering, our primary focus, proved advantageous for cineSYNC's diverse content library. It dynamically adapts to user behavior, making it well-suited for platforms with evolving user preferences.
 
 ### Recommendations
-- Use and refine the tuned KNNWithMeans (KNN2) model.
-- Experiment with different values for parameters like 'k,' 'min_support,' and 'shrinkage' to optimize configuration.
+
+- *Use and refine the tuned KNNWithMeans (KNN2) model.*
+
+- *Experiment with different values* for parameters like 'k,' 'min_support,' and 'shrinkage' to optimize configuration.
+
+- *Advantages*:
+    - Its interpretability and adaptability to changing user preferences make it well-suited for smaller datasets.
+    - Unlike matrix factorization, which excels at handling sparse data and imputing missing values, KNNWithMeans provides transparency in recommendations, facilitating a clearer understanding of the underlying basis.
+    - Particularly beneficial for smaller datasets, KNNWithMeans simplifies implementation by avoiding the complex training processes associated with matrix factorization, offering a practical and effective choice for scenarios prioritizing interpretability and adaptability to evolving preferences.
+
+- *Disadvantages:* 
+    - This model can be computationally expensive, especially as the dataset grows.
+    - This model may also struggle with the cold start problem for new users or items with limited interaction history. 
+
+- *Recommendation:* To address the cold start problem, we suggest a content-based or hybrid approach to provide content based recs for users with limited interaction. By combining content-based recommendations with k-NN with Means, you can provide meaningful suggestions even when there is insufficient interaction data.
+
+
 
 ### Next Steps
 1. **Scale Up Dataset:** Our modeling project utilized a small subset of the available data. Moving forward, we recommend expanding usage of the dataset to capture a broader spectrum of user preferences.
@@ -198,7 +213,7 @@ Collaborative filtering, our primary focus, proved advantageous for cineSYNC's d
     
 4. **Exploring Content-Based or Hybrid Approaches:** While collaborative filtering excels in capturing user preferences, a hybrid approach that integrates content-based recommendations will be crucial. Considering features such as genre, director, or actor information in tandem with CF models will yield richer and more diverse recommendations.
 
-### Final Notes to Consider for Each Model
+### Final Notes to Consider for All Models
 
 #### ALS (Alternating Least Squares):
 

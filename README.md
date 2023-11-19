@@ -70,16 +70,22 @@ In this project, we explore 3 total models: 2 matrix factorization models and 1 
 
 Matrix Factorization is a process of decomposing a user-item matrix into latent (underlying) factors, capturing hidden patterns and enabling prediction of missing values within the matrix for personalized recommendations.
 
+Here is a quick look at what we mean by user-item matrix:
+
 <img src="Images/user_item_matrix.png" alt="User-Item Matrix" width="400" height="200">
 [User-Item Matrix]
-
-<img src="Images/als_visual.png" alt="Visual of ALS Algorithm" width="400" height="200">
-[ALS Algorithm Visualized]
 
 
 #### Model 1: Alternating Least Squares (ALS) with PySpark
 
-The ALS algorithm optimizes the latent factors by iteratively decomposing the user-item interaction matrix, minimizing the reconstruction error between observed and predicted ratings. This iterative optimization process is the hallmark of ALS, as it alternates between fixing one matrix (either user or item factors) and optimizing the other. Through this alternating process, ALS uncovers latent features that represent user preferences, facilitating the generation of accurate and personalized recommendations.
+The first matrix factorization algorithm we are testing is ALS. 
+
+A quick glance at the ALS algorithm at work:
+
+<img src="Images/als_visual.png" alt="Visual of ALS Algorithm" width="400" height="200">
+[ALS Algorithm Visualized]
+
+Essentially, the ALS algorithm optimizes the latent factors by iteratively decomposing the user-item interaction matrix, minimizing the reconstruction error between observed and predicted ratings. This iterative optimization process is the hallmark of ALS, as it alternates between fixing one matrix (either user or item factors) and optimizing the other. Through this alternating process, ALS uncovers latent features that represent user preferences, facilitating the generation of accurate and personalized recommendations.
 
 *See notebook for full code and markdown of ALS modeling.*
 
@@ -92,64 +98,50 @@ Here is a sample output of our ALS model at work for user 123:
 
 #### Model 2: Singular Value Decomposition (SVD) with Surprise
 
-The SVD algorithm decomposes the user-item interaction matrix into three matrices: `U` (user matrix), `Σ` (diagonal matrix of singular values), and `V^T` (item matrix transpose). By retaining only the top singular values, SVD reduces the dimensionality of the original matrix, revealing latent factors that represent underlying patterns in the data.
+The second matrix factorization algorithm we are testing is SVD.
 
+Here is SVD-at-a-glace:
 
+<img src="Images/SVD_visual.png" alt="Visual of SVD Algorithm" width="400" height="200">
+[SVD Algorithm Visualized]
 
+The SVD algorithm decomposes the user-item interaction matrix into three matrices: `U` (user matrix), `Σ` (diagonal matrix of singular values), and `V^T` (item matrix transpose). By retaining only the top singular values (values of highest importance), SVD reduces the dimensionality of the original matrix, revealing latent factors that represent underlying patterns in the data.
 
-*See notebook for full code of SVD modeling.*
-
-#### Memory-basd model:
-
-**Model 3:** KNNWithMeans with Surprise
- 
-
-
-
-### Model 2: Singular Value Decomposition (SVD) with Surprise
-
-#### What is SVD?
-Welcome to Model 2, our second foray into exploring which collaborative filtering system would serve cineSYNC best. Here, we introduce Singular Value Decomposition (SVD) implemented with the Surprise library. SVD is a dimensionality reduction technique that transforms the user-item interaction matrix into a lower-dimensional representation of itself, capturing latent factors that contribute to user preferences. 
-
-
-
-While traditional supervised ML algorithms learn from labeled data with explicit input-output pairs, SVD (like ALS) utilizes implicit feedback from user-item interactions. In a supervised learning paradigm, SVD learns to predict user ratings (labels, whichh, although not explicitly labeled, serve as a form of implicit feedback that guides the learning process) for items based on historical ratings. The goal is to minimize the difference between predicted and actual ratings, just like a regression problem in supervised learning.
-
-#### Why Surprise?
-The Surprise library serves as a fitting choice for implementing SVD in our recommendation system. Here's why:
-- **Ease of Use:** Surprise abstracts away the complexity of SVD implementation, providing an intuitive interface that simplifies the integration of collaborative filtering algorithms.
-- **Efficient Algorithms:** Surprise is optimized for efficiency, leveraging well-established algorithms for collaborative filtering tasks. This efficiency is crucial, especially when working with large-scale datasets.
-
+Here is our SVD model at work for user 300:
 
 <img src="Images/SVD_rec_output.png" alt="SVD Top 10" width="400" height="200">
 [Top 10 Recommendations for User 300 based on SVD Model]
 
-### SVD Model Evaluation
-
-**SVD RMSE:** 0.4751
-
-*Our SVD model's RMSE score is 0.475, indicating that, on average, the model's predictions deviate from actual ratings by around 0.4751 units (or 'stars'). We see a slight improvement with our SVD model compared to our ALS model in RMSE, jumping down from ~0.57 to 0.48.*
-
-**SVD MAE:** 0.4044
-
-*Our SVD model's MAE score is 0.4044, indicating that, on average, the absolute difference between predicted and actual ratings is around 0.4044 units (or 'stars').*
-
-### Model 3: KNNWithMeans with Surprise
-#### What is KNNWithMeans?
-In our ongoing mission to refine cineSYNC's recommendation system, we're exploring the K-Nearest Neighbors with Means (KNNWithMeans) algorithm using the Surprise library. Unlike our previous models (ALS and SVD), KNNWithMeans operates within the realm of memory-based collaborative filtering. This approach is rooted in the idea that users who have agreed in the past are likely to agree again in the future, utilizing the "memory" of past interactions to predict unseen items.
-
-The "k" in KNN refers to the number of neighbors considered when making predictions, implying identifying users with similar tastes and incorporating their opinions to predict how a particular user might rate a movie. KNNWithMeans calculates predictions by considering the weighted average of ratings from users who share similarities, adjusting for each user's mean rating. This adjustment, referred to as "means," helps account for the inherent variability in how users rate items.
-
-In the context of collaborative filtering, a supervised learning approach involves training a model on existing user-item interactions to predict how users might rate unseen items. KNNWithMeans embraces this concept by learning from historical ratings of users who share similarities, using this knowledge to generate personalized recommendations.
+*See notebook for full code of SVD modeling.*
 
 
-#### Why Susprise (again)?
-Surprise excels in handling user-item interaction data, streamlining the process of creating train-test splits, defining reader configurations, and training models. It offers a unified framework for various collaborative filtering algorithms, making it an ideal choice for our exploration of KNNWithMeans.
+### Memory-based Model
 
-*See notebook for full code of KNNWithMeans modeling.*
+Memory-based CF models are rooted in the idea that users who have agreed in the past are likely to agree again in the future, utilizing the "memory" of past interactions to predict unseen items.
+
+Here is a look at how a user-based, memory-based algorithm works compared to matrix factorization algorithms:
+
+<img src="Images/memory_based_vs_factorization.png" alt="Memory-based vs Matrix Factorization" width="400" height="200">
+[Memory-based vs Matrix Factorization]
+
+
+#### Model 3: KNNWithMeans with Surprise
+ 
+The memory-based algorithm we are testing is the KNNWithMeans algorithm. 
+
+<img src="Images/knn_visual.png" alt="KNNWith Means Visual" width="400" height="200">
+[KNNWithMeans Model Visualized]
+
+"k" refers to the number of neighbors considered when making predictions, implying identifying users with similar tastes and incorporating their opinions to predict how a particular user might rate a movie. KNNWithMeans calculates predictions by considering the weighted average of ratings from users who share similarities, adjusting for each user's mean rating. This adjustment, referred to as "means," helps account for the inherent variability in how users rate items.
+
+
+Here is a look at our KNNWithMeans algorithm at work for user 59:
 
 <img src="Images/KNN_rec_output.png" alt="KNNWithMeans Top 10" width="400" height="200">
 [Top 10 Recommendations for User 59 based on KNNWithMeans Model]
+
+*See notebook for full code of KNNWithMeans modeling.*
+
 
 ### KNNWithMeans Model Evaluation
 

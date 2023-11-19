@@ -182,15 +182,6 @@ We've created a table that shows all of our evaluation metrics in one place so t
 
 - *Use and refine the tuned KNNWithMeans (KNN2) model,* experimenting with different values for parameters like 'k,' 'min_support,' and 'shrinkage' to optimize configuration.
 
-    - *Advantages of this model*:
-        - Its interpretability and adaptability to changing user preferences make it well-suited for smaller datasets.
-        - Unlike matrix factorization, which excels at handling sparse data and imputing missing values, KNNWithMeans provides transparency in recommendations, facilitating a clearer understanding of the underlying basis.
-        - Particularly beneficial for smaller datasets, KNNWithMeans simplifies implementation by avoiding the complex training processes associated with matrix factorization, offering a practical and effective choice for scenarios prioritizing interpretability and adaptability to evolving preferences.
-
-    - *Disadvantages of this model:* 
-        - This model can be computationally expensive, especially as the dataset grows.
-        - This model may also struggle with the cold start problem for new users or items with limited interaction history. 
-
 - *To address the cold start problem*, we suggest a content-based or hybrid approach to provide content based recs for users with limited interaction. By combining content-based recommendations with k-NN with Means, you can provide meaningful suggestions even when there is insufficient interaction data.
 
 
@@ -199,15 +190,15 @@ We've created a table that shows all of our evaluation metrics in one place so t
 
 2. **Exploring Additional Metrics:** While RMSE and MAE provide valuable insights into model accuracy, it's essential to consider alternative evaluation metrics such as NDCG (Normalized Discounted Cumulative Gain) or MAP (Mean Average Precision). These metrics may offer a more nuanced understanding of model performance, especially in scenarios where the emphasis is on the ranking quality of user recommendations.
 
-3. **Implementing User Feedback:** Incorporating direct user feedback is a powerful strategy for continuous improvement. By collecting and analyzing user ratings and interactions with recommended movies, cineSYNC can refine its models over time, adapting to evolving user preferences. Here are some ideas:
-    - Implement a simple thumbs-up or thumbs-down feedback option for quick responses.
-    - Track implicit feedback, such as the amount of time a user spends watching a recommended movie or the number of times they replay a specific scene.
-    - Periodically prompt users to participate in preference surveys.
-    - Monitor the click-through rate for recommended movies.
-    - Conduct A/B testing with different recommendation algorithms or variations of existing models.
-    - Allow users to curate their watchlist, and use this information to refine recommendations.
-    - Implement a "Recommended for You" section based on individual user preferences.
-    - Regularly update the recommendation model with the latest user feedback.
+3. **Track User Feedback:** Here are some ideas:
+        - Implement a simple thumbs-up or thumbs-down feedback option for quick responses.
+        - Track implicit feedback, such as the amount of time a user spends watching a recommended movie or the number of times they replay a specific scene.
+        - Periodically prompt users to participate in preference surveys.
+        - Monitor the click-through rate for recommended movies.
+        - Conduct A/B testing with different recommendation algorithms or variations of existing models.
+        - Allow users to curate their watchlist, and use this information to refine recommendations.
+        - Implement a "Recommended for You" section based on individual user preferences.
+        - Regularly update the recommendation model with the latest user feedback.
     
     
 4. **Exploring Content-Based or Hybrid Approaches:** While collaborative filtering excels in capturing user preferences, a hybrid approach that integrates content-based recommendations will be crucial. Considering features such as genre, director, or actor information in tandem with CF models will yield richer and more diverse recommendations.

@@ -86,7 +86,7 @@ A quick glance at the ALS algorithm at work:
 [ALS Algorithm Visualized]
 
 
-Essentially, the ALS algorithm optimizes the latent factors by iteratively decomposing the user-item interaction matrix, minimizing the reconstruction error between observed and predicted ratings. This iterative optimization process is the hallmark of ALS, as it alternates between fixing one matrix (either user or item factors) and optimizing the other. Through this alternating process, ALS uncovers latent features that represent user preferences, facilitating the generation of accurate and personalized recommendations.
+Essentially, the ALS algorithm optimizes the latent factors by iteratively decomposing the user-item interaction matrix, minimizing the reconstruction error between observed and predicted ratings.
 
 **Advantages:** ALS can be parallelized effectively, which means it can handle large-scale, sparsely populated datasets and computations efficiently.
 

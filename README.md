@@ -18,7 +18,7 @@ Our mission is to introduce cineSYNC to the basics and intricacies of user-based
 
 
 #### Why Collaborative Filtering?
-Collaborative filtering holds a distinct advantage in capturing complex and evolving user preferences. Consider example if a person A likes item 1, 2, 3 and B like 2,3,4 then they have similar interests and A should like item 4 and B should like item 1*. Unlike content-based approaches, which rely on item characteristics, collaborative filtering adapts dynamically to user behavior, leveraging the wisdom of the crowd to predict user ratings. 
+Collaborative filtering holds a distinct advantage in capturing complex and evolving user preferences. Consider this example: if a person A likes item 1, 2, 3 and B likes 2,3,4, then we can assume that A might like item 4 and B might like item 1*. Unlike content-based approaches, which rely on item characteristics, collaborative filtering adapts dynamically to user behavior, leveraging the wisdom of the crowd to predict user ratings. 
 
 * *Source:* https://medium.com/@patelneha1495/recommendation-system-in-python-using-als-algorithm-and-apache-spark-27aca08eaab3
 

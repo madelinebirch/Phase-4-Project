@@ -78,14 +78,19 @@ Here is a quick look at what we mean by user-item matrix:
 
 #### Model 1: Alternating Least Squares (ALS) with PySpark
 
-The first matrix factorization algorithm we are testing is ALS. 
+The first matrix factorization algorithm we are testing is ALS.
 
 A quick glance at the ALS algorithm at work:
 
 <img src="Images/als_visual.png" alt="Visual of ALS Algorithm" width="400" height="200">
 [ALS Algorithm Visualized]
 
+
 Essentially, the ALS algorithm optimizes the latent factors by iteratively decomposing the user-item interaction matrix, minimizing the reconstruction error between observed and predicted ratings. This iterative optimization process is the hallmark of ALS, as it alternates between fixing one matrix (either user or item factors) and optimizing the other. Through this alternating process, ALS uncovers latent features that represent user preferences, facilitating the generation of accurate and personalized recommendations.
+
+**Advantages:** ALS can be parallelized effectively, which means it can handle large-scale, sparsely populated datasets and computations efficiently.
+
+**Limitations:** ALS is an iterative optimization algorithm, and its final solution can depend on the initial values assigned to the user and item latent factors. Depending on the starting point, ALS may get stuck in a local minimum, leading to suboptimal results.
 
 *See notebook for full code and markdown of ALS modeling.*
 
@@ -105,7 +110,12 @@ Here is SVD-at-a-glace:
 <img src="Images/SVD_visual.png" alt="Visual of SVD Algorithm" width="400" height="200">
 [SVD Algorithm Visualized]
 
-The SVD algorithm decomposes the user-item interaction matrix into three matrices: `U` (user matrix), `Σ` (diagonal matrix of singular values), and `V^T` (item matrix transpose). By retaining only the top singular values (values of highest importance), SVD reduces the dimensionality of the original matrix, revealing latent factors that represent underlying patterns in the data.
+
+In a nutshell, the SVD algorithm decomposes the user-item interaction matrix into three matrices: `U` (user matrix), `Σ` (diagonal matrix of singular values), and `V^T` (item matrix transpose). By retaining only the top singular values (values of highest importance), SVD reduces the dimensionality of the original matrix, revealing latent factors that represent underlying patterns in the data.
+
+**Advantages:** SVD provides a compact representation of latent factors, enabling efficient storage and faster computation for recommendations.
+
+**Limitations:** SVD may struggle with handling missing values, and it may not perform well in situations where the user-item interaction matrix is highly sparse.
 
 Here is our SVD model at work for user 300:
 
@@ -119,7 +129,7 @@ Here is our SVD model at work for user 300:
 
 Memory-based CF models are rooted in the idea that users who have agreed in the past are likely to agree again in the future, utilizing the "memory" of past interactions to predict unseen items.
 
-Here is a look at how a user-based, memory-based algorithm works compared to matrix factorization algorithms:
+Here is a look at how a user-based, memory-based algorithm works in comparison to matrix factorization algorithms:
 
 <img src="Images/memory_based_vs_factorization.png" alt="Memory-based vs Matrix Factorization" width="400" height="200">
 [Memory-based vs Matrix Factorization]
@@ -132,7 +142,8 @@ The memory-based algorithm we are testing is the KNNWithMeans algorithm.
 <img src="Images/knn_visual.png" alt="KNNWith Means Visual" width="400" height="200">
 [KNNWithMeans Model Visualized]
 
-"k" refers to the number of neighbors considered when making predictions, implying identifying users with similar tastes and incorporating their opinions to predict how a particular user might rate a movie. KNNWithMeans calculates predictions by considering the weighted average of ratings from users who share similarities, adjusting for each user's mean rating. This adjustment, referred to as "means," helps account for the inherent variability in how users rate items.
+
+Basically, "k" refers to the number of neighbors considered when making predictions, implying identifying users with similar tastes and incorporating their opinions to predict how a particular user might rate a movie. KNNWithMeans calculates predictions by considering the weighted average of ratings from users who share similarities, adjusting for each user's mean rating. This adjustment, referred to as "means," helps account for the inherent variability in how users rate items.
 
 
 Here is a look at our KNNWithMeans algorithm at work for user 59:
@@ -143,61 +154,44 @@ Here is a look at our KNNWithMeans algorithm at work for user 59:
 *See notebook for full code of KNNWithMeans modeling.*
 
 
-### KNNWithMeans Model Evaluation
+#### Model 4: Tuned KNNWithMeans 
 
-**KNN RMSE:** 0.3822
-
-**KNN MAE:** 0.3201
-
-*It appears our KNNWithMeans model's RMSE is better than our SVD model's, at 0.382, and the MAE score compared to the SVD model's has dropped to 0.320. Not a huge difference, but it gets us that must closer to accurately predicting our users' preferences.*
-
-
-### Model 4: Tuned KNNWithMeans 
-
-Building on our original KNNWithMeans model to see if we can get lower evaluation metrics, we will focus here on the `sim_options_tuned` snippet:
+Building on our original KNNWithMeans model to see if we can get lower evaluation metrics, we will focus here on the `sim_options_tuned` snippet, found in `notebook.ipynb`:
 
 1. **K Neighbors (`k`):** Instead of letting Surprise set a default value for`k` (the number of similar users to consider when making predictions), we set it to 1o ourselves. A lower value often leads to more personalized recommendations.
 2. **min_support:** `min_support` is set to 50, indicating that there must be a minimum of 50 common items between two users for them to be considered neighbors.
 3. **`shrinkage`:** A higher shrinkage value like 300 indicates stronger regularization, which can be beneficial in scenarios with sparse data or when you want to prevent the model from overfitting to the training data
 
-**KNN2 RMSE:** 0.3182
 
-**KNN2 MAE:** 0.1955
+#### All Model Evaluations
 
-Our RMSE and MAE values are getting closer and closer to 0 every time, indicating more and more accurate predictions.
-
-It would be helpful to create a DataFrame that prints out all of our evaluation metrics in one place so that we can see how our model iterations have yielded increasingly more favorable scores:
+We've created a table that shows all of our evaluation metrics in one place so that we can see how our model iterations have yielded increasingly more favorable RMSE and MAE scores:
 
 <img src="Images/all_metrics_df.png" alt="DataFrame of ALl Model Evaluation Metrics" width="400" height="200">
 [DataFrame of All Model Evaluation Metrics]
+
 
 # Conclusions & Recommendations
 
 **Key Findings:**
 
-- ALS, with an RMSE of 0.570505 and MAE of 0.451363, showcased a respectable performance, laying a foundation for collaborative filtering.
-- SVD excelled with an RMSE of 0.475072 and MAE of 0.404359, demonstrating its robustness in capturing nuanced user preferences.
-- KNNWithMeans emerged as a powerful contender, achieving an RMSE of 0.382185 and MAE of 0.320137, highlighting its adaptability to dynamic user behavior.
-- A tuned version of KNNWithMeans (KNN2) further elevated performance with an RMSE of 0.318239 and MAE of 0.195525, showcasing the impact of hyperparameter optimization.
-
-**Collaborative Filtering Advantage:**
-Collaborative filtering, our primary focus, proved advantageous for cineSYNC's diverse content library. It dynamically adapts to user behavior, making it well-suited for platforms with evolving user preferences.
+    - A tuned version of KNNWithMeans (KNN2) shows the best performance, with an RMSE of 0.318239 and MAE of 0.195525, showcasing the impact of hyperparameter optimization. This is an improvement upon both the ALS and SVD models’ scores.
+    - On average, the tuned KNN model's predictions deviate from actual user ratings by around 0.32 stars. 
 
 ### Recommendations
 
 - *Use and refine the tuned KNNWithMeans (KNN2) model,* experimenting with different values for parameters like 'k,' 'min_support,' and 'shrinkage' to optimize configuration.
 
-- *Advantages of this model*:
-    - Its interpretability and adaptability to changing user preferences make it well-suited for smaller datasets.
-    - Unlike matrix factorization, which excels at handling sparse data and imputing missing values, KNNWithMeans provides transparency in recommendations, facilitating a clearer understanding of the underlying basis.
-    - Particularly beneficial for smaller datasets, KNNWithMeans simplifies implementation by avoiding the complex training processes associated with matrix factorization, offering a practical and effective choice for scenarios prioritizing interpretability and adaptability to evolving preferences.
+    - *Advantages of this model*:
+        - Its interpretability and adaptability to changing user preferences make it well-suited for smaller datasets.
+        - Unlike matrix factorization, which excels at handling sparse data and imputing missing values, KNNWithMeans provides transparency in recommendations, facilitating a clearer understanding of the underlying basis.
+        - Particularly beneficial for smaller datasets, KNNWithMeans simplifies implementation by avoiding the complex training processes associated with matrix factorization, offering a practical and effective choice for scenarios prioritizing interpretability and adaptability to evolving preferences.
 
-- *Disadvantages of this model:* 
-    - This model can be computationally expensive, especially as the dataset grows.
-    - This model may also struggle with the cold start problem for new users or items with limited interaction history. 
+    - *Disadvantages of this model:* 
+        - This model can be computationally expensive, especially as the dataset grows.
+        - This model may also struggle with the cold start problem for new users or items with limited interaction history. 
 
-- *Recommendation:* To address the cold start problem, we suggest a content-based or hybrid approach to provide content based recs for users with limited interaction. By combining content-based recommendations with k-NN with Means, you can provide meaningful suggestions even when there is insufficient interaction data.
-
+- *To address the cold start problem*, we suggest a content-based or hybrid approach to provide content based recs for users with limited interaction. By combining content-based recommendations with k-NN with Means, you can provide meaningful suggestions even when there is insufficient interaction data.
 
 
 ### Next Steps
@@ -218,19 +212,17 @@ Collaborative filtering, our primary focus, proved advantageous for cineSYNC's d
     
 4. **Exploring Content-Based or Hybrid Approaches:** While collaborative filtering excels in capturing user preferences, a hybrid approach that integrates content-based recommendations will be crucial. Considering features such as genre, director, or actor information in tandem with CF models will yield richer and more diverse recommendations.
 
-### Final Notes to Consider for Model-Based Matrix Factorization
+### Repo Structure
 
-#### ALS (Alternating Least Squares):
+├── Data
 
-**Advantage:** ALS is well-suited for handling sparse matrices, making it effective in scenarios where users interact with only a small subset of items.
+├── Images
 
-**Disadvantage:** ALS may converge to local minima, and its performance can be influenced by the choice of hyperparameters, such as the regularization term.
+├── README.md
 
-#### SVD (Matrix Factorization):
+└── notebook.ipynb
 
-**Advantage:** SVD provides a compact representation of latent factors, enabling efficient storage and faster computation for recommendations.
-
-**Disadvantage:** SVD may struggle with handling missing values, and it may not perform well in situations where the user-item interaction matrix is highly sparse.
+├── presentation.pdf
 
 ### Image Sources:
 https://medium.com/@ashmi_banerjee/understanding-collaborative-filtering-f1f496c673fd

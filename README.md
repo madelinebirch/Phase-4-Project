@@ -175,8 +175,8 @@ We've created a table that shows all of our evaluation metrics in one place so t
 
 **Key Findings:**
 
-    - A tuned version of KNNWithMeans (KNN2) shows the best performance, with an RMSE of 0.318239 and MAE of 0.195525, showcasing the impact of hyperparameter optimization. This is an improvement upon both the ALS and SVD models’ scores.
-    - On average, the tuned KNN model's predictions deviate from actual user ratings by around 0.32 stars. 
+   - A tuned version of KNNWithMeans (KNN2) shows the best performance, with an RMSE of 0.318239 and MAE of 0.195525, showcasing the impact of hyperparameter optimization. This is an improvement upon both the ALS and SVD models’ scores.
+   - On average, the tuned KNN model's predictions deviate from actual user ratings by around 0.32 stars. 
 
 ### Recommendations
 
